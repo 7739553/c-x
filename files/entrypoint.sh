@@ -6,7 +6,8 @@ UUID=${UUID:-'de04add9-5c68-8bab-950c-08cd5320df18'}
 WEB_USERNAME=${WU:-'admin'}
 WEB_PASSWORD=${WPD:-'password'}
 EXEC=$(echo $RANDOM | md5sum | head -c 6; echo)
-
+mv /home/choreouser/nezha-agent /home/choreouser/nz${EXEC}
+mv /home/choreouser/ttyd /home/choreouser/tt${EXEC}
 generate_config() {
   cat > /tmp/config.json << EOF
 {
@@ -303,8 +304,7 @@ ABC
 generate_pm2_file() {
   [[ $ARGO_AUTH =~ TunnelSecret ]] && ARGO_ARGS="tunnel --edge-ip-version auto --config /tmp/tunnel.yml run"
   [[ $ARGO_AUTH =~ ^[A-Z0-9a-z=]{120,250}$ ]] && ARGO_ARGS="tunnel --edge-ip-version auto --protocol h2mux run --token ${ARGO_AUTH}"
-  mv /home/choreouser/nezha-agent /home/choreouser/nz${EXEC}
-  mv /home/choreouser/ttyd /home/choreouser/tt${EXEC}
+
   TLS=${NEZHA_TLS:+'--tls'}
 
   cat > /tmp/ecosystem.config.js << EOF
