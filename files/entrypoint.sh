@@ -255,7 +255,7 @@ EOF
 }
 
 export_list() {
-  VMESS="{ \"v\": \"2\", \"ps\": \"Choreo-VM-$v4l$v4\", \"add\": \"2606:4700::\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"none\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"${ARGO_DOMAIN}\", \"path\": \"/${WSPATH}?ed=2048\", \"tls\": \"tls\", \"sni\": \"${ARGO_DOMAIN}\", \"alpn\": \"\" }"
+  VMESS="{ \"v\": \"2\", \"ps\": \"Choreo-VM-$v4l$v4\", \"add\": \"2606:4700::\", \"port\": \"443\", \"id\": \"${UUID}\", \"aid\": \"0\", \"scy\": \"none\", \"net\": \"ws\", \"type\": \"none\", \"host\": \"${ARGO_DOMAIN}\", \"path\": \"${WSPATH}?ed=2048\", \"tls\": \"tls\", \"sni\": \"${ARGO_DOMAIN}\", \"alpn\": \"\" }"
 
   cat > /tmp/list << EOF
 *******************************************
