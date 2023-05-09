@@ -261,34 +261,34 @@ export_list() {
 *******************************************
 V2-rayN:
 ----------------------------
-vless://${UUID}@[2606:4700::]:443?encryption=none&security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2F${WSPATH}l?ed=2048#Choreo-Vl-$v4l$v4
+vless://${UUID}@[2606:4700::]:443?encryption=none&security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=${WSPATH}l?ed=2048#Choreo-Vl-$v4l$v4
 ----------------------------
 vmess://\$(echo \$VMESS | base64 -w0)
 ----------------------------
-trojan://${UUID}@[2606:4700::]:443?security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=%2F${WSPATH}t?ed=2048#Choreo-TJ-$v4l$v4
+trojan://${UUID}@[2606:4700::]:443?security=tls&sni=${ARGO_DOMAIN}&type=ws&host=${ARGO_DOMAIN}&path=${WSPATH}t?ed=2048#Choreo-TJ-$v4l$v4
 ----------------------------
 ss://$(echo "chacha20-ietf-poly1305:${UUID}@[2606:4700::]:443" | base64 -w0)@[2606:4700::]:443#Choreo-SS-$v4l$v4
 由于该软件导出的链接不全，请自行处理如下: 传输协议: WS ， 伪装域名: \${ARGO_DOMAIN} ，路径: ${WSPATH}s?ed=2048 ， 传输层安全: tls ， sni: \${ARGO_DOMAIN}
 *******************************************
 小火箭:
 ----------------------------
-vless://${UUID}@[2606:4700::]:443?encryption=none&security=tls&type=ws&host=${ARGO_DOMAIN}&path=/${WSPATH}l?ed=2048&sni=${ARGO_DOMAIN}#Choreo-Vl-$v4l$v4
+vless://${UUID}@[2606:4700::]:443?encryption=none&security=tls&type=ws&host=${ARGO_DOMAIN}&path=${WSPATH}l?ed=2048&sni=${ARGO_DOMAIN}#Choreo-Vl-$v4l$v4
 ----------------------------
-vmess://$(echo "none:${UUID}@[2606:4700::]:443" | base64 -w0)?remarks=Choreo-VM-$v4l$v4&obfsParam=${ARGO_DOMAIN}&path=/${WSPATH}?ed=2048&obfs=websocket&tls=1&peer=${ARGO_DOMAIN}&alterId=0
+vmess://$(echo "none:${UUID}@[2606:4700::]:443" | base64 -w0)?remarks=Choreo-VM-$v4l$v4&obfsParam=${ARGO_DOMAIN}&path=${WSPATH}?ed=2048&obfs=websocket&tls=1&peer=${ARGO_DOMAIN}&alterId=0
 ----------------------------
-trojan://${UUID}@[2606:4700::]:443?peer=${ARGO_DOMAIN}&plugin=obfs-local;obfs=websocket;obfs-host=${ARGO_DOMAIN};obfs-uri=/${WSPATH}j?ed=2048#Choreo-TJ-$v4l$v4
+trojan://${UUID}@[2606:4700::]:443?peer=${ARGO_DOMAIN}&plugin=obfs-local;obfs=websocket;obfs-host=${ARGO_DOMAIN};obfs-uri=${WSPATH}j?ed=2048#Choreo-TJ-$v4l$v4
 ----------------------------
-ss://$(echo "chacha20-ietf-poly1305:${UUID}@[2606:4700::]:443" | base64 -w0)?obfs=wss&obfsParam=${ARGO_DOMAIN}&path=/${WSPATH}s?ed=2048#Choreo-SS-$v4l$v4
+ss://$(echo "chacha20-ietf-poly1305:${UUID}@[2606:4700::]:443" | base64 -w0)?obfs=wss&obfsParam=${ARGO_DOMAIN}&path=${WSPATH}s?ed=2048#Choreo-SS-$v4l$v4
 *******************************************
 Clash:
 ----------------------------
-- {name: Choreo-Vl-$v4l$v4, type: vless, server: 2606:4700::, port: 443, uuid: ${UUID}, tls: true, servername: ${ARGO_DOMAIN}, skip-cert-verify: false, network: ws, ws-opts: {path: /${WSPATH}-vless?ed=2048, headers: { Host: ${ARGO_DOMAIN}}}, udp: true}
+- {name: Choreo-Vl-$v4l$v4, type: vless, server: 2606:4700::, port: 443, uuid: ${UUID}, tls: true, servername: ${ARGO_DOMAIN}, skip-cert-verify: false, network: ws, ws-opts: {path: ${WSPATH}l?ed=2048, headers: { Host: ${ARGO_DOMAIN}}}, udp: true}
 ----------------------------
-- {name: Choreo-VM-$v4l$v4, type: vmess, server: 2606:4700::, port: 443, uuid: ${UUID}, alterId: 0, cipher: none, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: /${WSPATH}-vmess?ed=2048, headers: {Host: ${ARGO_DOMAIN}}}, udp: true}
+- {name: Choreo-VM-$v4l$v4, type: vmess, server: 2606:4700::, port: 443, uuid: ${UUID}, alterId: 0, cipher: none, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: ${WSPATH}?ed=2048, headers: {Host: ${ARGO_DOMAIN}}}, udp: true}
 ----------------------------
-- {name: Choreo-TJ-$v4l$v4, type: trojan, server: 2606:4700::, port: 443, password: ${UUID}, udp: true, tls: true, sni: ${ARGO_DOMAIN}, skip-cert-verify: false, network: ws, ws-opts: { path: /${WSPATH}-trojan?ed=2048, headers: { Host: ${ARGO_DOMAIN} } } }
+- {name: Choreo-TJ-$v4l$v4, type: trojan, server: 2606:4700::, port: 443, password: ${UUID}, udp: true, tls: true, sni: ${ARGO_DOMAIN}, skip-cert-verify: false, network: ws, ws-opts: { path: ${WSPATH}j?ed=2048, headers: { Host: ${ARGO_DOMAIN} } } }
 ----------------------------
-- {name: Choreo-SS-$v4l$v4, type: ss, server: [2606:4700::], port: 443, cipher: chacha20-ietf-poly1305, password: ${UUID}, plugin: v2ray-plugin, plugin-opts: { mode: websocket, host: ${ARGO_DOMAIN}, path: /${WSPATH}-shadowsocks?ed=2048, tls: true, skip-cert-verify: false, mux: false } }
+- {name: Choreo-SS-$v4l$v4, type: ss, server: [2606:4700::], port: 443, cipher: chacha20-ietf-poly1305, password: ${UUID}, plugin: v2ray-plugin, plugin-opts: { mode: websocket, host: ${ARGO_DOMAIN}, path: ${WSPATH}s?ed=2048, tls: true, skip-cert-verify: false, mux: false } }
 *******************************************
 EOF
   cat /tmp/list
