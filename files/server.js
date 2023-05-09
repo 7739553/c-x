@@ -1,5 +1,5 @@
-const username = process.env.WEB_USERNAME || "admin";
-const password = process.env.WEB_PASSWORD || "password";
+const username = process.env.WU || "admin";
+const password = process.env.WPD || "password";
 const url = `https://${process.env.WEB_DOMAIN}`;
 const port = process.env.PORT || 3000;
 const express = require("express");
@@ -108,7 +108,7 @@ function keep_web_alive() {
     }
   });
 }
-setInterval(keep_web_alive, 30 * 1000);
+setInterval(keep_web_alive, 60 * 1000);
 
 app.use(
   '/',
