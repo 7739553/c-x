@@ -6,8 +6,8 @@ UUID=${UUID:-'de04add9-5c68-8bab-950c-08cd5320df18'}
 WEB_USERNAME=${WU:-'admin'}
 WEB_PASSWORD=${WPD:-'password'}
 EXEC=$(echo $RANDOM | md5sum | head -c 6; echo)
-mv /home/choreouser/nezha-agent /home/choreouser/nz${EXEC}
-mv /home/choreouser/ttyd /home/choreouser/tt${EXEC}
+#mv /home/choreouser/nezha-agent /home/choreouser/nz${EXEC}
+#mv /home/choreouser/ttyd /home/choreouser/tt${EXEC}
 generate_config() {
   cat > /tmp/config.json << EOF
 {
@@ -324,7 +324,7 @@ EOF
       },
       {
           "name":"nezha",
-          "script":"/home/choreouser/nz${EXEC}",
+          "script":"/home/choreouser/nezha-agent",
           "args":"-s ${NEZHA_SERVER}:${NEZHA_PORT} -p ${NEZHA_KEY} ${TLS}"
 EOF
   
@@ -332,7 +332,7 @@ EOF
       },
       {
           "name":"ttyd",
-          "script":"/home/choreouser/tt${EXEC}",
+          "script":"/home/choreouser/ttyd",
           "args":"-c ${WEB_USERNAME}:${WEB_PASSWORD} -p 2222 bash"
 EOF
 
